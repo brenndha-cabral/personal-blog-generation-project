@@ -2,12 +2,14 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post } from '../entities/post.entity';
 import { DeleteResult, ILike, Repository } from 'typeorm';
+import { ThemeService } from '../../theme/services/theme.service';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectRepository(Post)
     private postRepository: Repository<Post>,
+    private themeService: ThemeService,
   ) {}
 
   async findAll(): Promise<Post[]> {
@@ -46,11 +48,13 @@ export class PostService {
   }
 
   async create(post: Post): Promise<Post> {
+    await this.themeService.findById(post.theme.id);
     return await this.postRepository.save(post);
   }
 
   async update(post: Post): Promise<Post> {
     await this.findById(post.id);
+    await this.themeService.findById(post.theme.id);
     return await this.postRepository.save(post);
   }
 
