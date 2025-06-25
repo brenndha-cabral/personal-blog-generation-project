@@ -11,12 +11,15 @@ export class PostService {
   ) {}
 
   async findAll(): Promise<Post[]> {
-    return await this.postRepository.find();
+    return await this.postRepository.find({
+      relations: { theme: true },
+    });
   }
 
   async findById(id: number): Promise<Post> {
     const postById = await this.postRepository.findOne({
       where: { id },
+      relations: { theme: true },
     });
 
     if (!postById) {
@@ -29,6 +32,7 @@ export class PostService {
   async findByAllTitles(title: string): Promise<Post[]> {
     const postsByTitle = await this.postRepository.find({
       where: { title: ILike(`%${title}%`) },
+      relations: { theme: true },
     });
 
     if (!postsByTitle) {

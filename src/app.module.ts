@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostModule } from './post/models/post.module';
 import { Post } from './post/entities/post.entity';
+import { Theme } from './theme/entities/theme.entity';
+import { ThemeModule } from './theme/models/theme.module';
 
 @Module({
   imports: [
@@ -17,11 +19,12 @@ import { Post } from './post/entities/post.entity';
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [Post],
+        entities: [Post, Theme],
         synchronize: true,
       }),
     }),
     PostModule,
+    ThemeModule,
   ],
 })
 export class AppModule {}
