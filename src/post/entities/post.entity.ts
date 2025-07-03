@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Theme } from '../../theme/entities/theme.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity({ name: 'tb_posts' })
 export class Post {
@@ -28,4 +29,9 @@ export class Post {
     onDelete: 'CASCADE',
   })
   theme: Theme;
+
+  @ManyToOne(() => User, (user) => user.post, {
+    onDelete: 'CASCADE',
+  })
+  user: User;
 }

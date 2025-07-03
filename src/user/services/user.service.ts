@@ -14,12 +14,8 @@ export class UserService {
 
   async findByUser(user: string): Promise<User | null> {
     return await this.userRepository.findOne({
-      where: {
-        user: user,
-      },
-      relations: {
-        post: true,
-      },
+      where: { user: user },
+      relations: { post: true },
     });
   }
 
@@ -29,12 +25,8 @@ export class UserService {
 
   async findUserById(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
-      where: {
-        id,
-      },
-      relations: {
-        post: true,
-      },
+      where: { id },
+      relations: { post: true },
     });
 
     if (!user)

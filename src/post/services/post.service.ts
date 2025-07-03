@@ -14,14 +14,14 @@ export class PostService {
 
   async findAll(): Promise<Post[]> {
     return await this.postRepository.find({
-      relations: { theme: true },
+      relations: { theme: true, user: true },
     });
   }
 
   async findById(id: number): Promise<Post> {
     const postById = await this.postRepository.findOne({
       where: { id },
-      relations: { theme: true },
+      relations: { theme: true, user: true },
     });
 
     if (!postById) {
@@ -34,7 +34,7 @@ export class PostService {
   async findByAllTitles(title: string): Promise<Post[]> {
     const postsByTitle = await this.postRepository.find({
       where: { title: ILike(`%${title}%`) },
-      relations: { theme: true },
+      relations: { theme: true, user: true },
     });
 
     if (!postsByTitle) {
