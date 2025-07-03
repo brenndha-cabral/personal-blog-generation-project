@@ -5,6 +5,9 @@ import { PostModule } from './post/models/post.module';
 import { Post } from './post/entities/post.entity';
 import { Theme } from './theme/entities/theme.entity';
 import { ThemeModule } from './theme/models/theme.module';
+import { AuthModule } from './auth/auth.module';
+import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,12 +22,14 @@ import { ThemeModule } from './theme/models/theme.module';
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [Post, Theme],
+        entities: [Post, Theme, User],
         synchronize: true,
       }),
     }),
     PostModule,
     ThemeModule,
+    UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
