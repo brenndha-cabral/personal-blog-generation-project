@@ -35,7 +35,7 @@ export class ThemeController {
     return this.themeService.findById(id);
   }
 
-  @Get('/description/:description')
+  @Get('/:description')
   @HttpCode(HttpStatus.OK)
   findByAllThemes(@Param('description') description: string): Promise<Theme[]> {
     return this.themeService.findByAllThemes(description);
