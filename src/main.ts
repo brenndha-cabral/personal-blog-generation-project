@@ -8,8 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   const port = config.get<number>('PORT', 3000);
-
   process.env.TZ = config.get<string>('TIMEZONE');
+
+  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
 
   const configSwagger = new DocumentBuilder()
     .setTitle('Blog Pessoal')
@@ -25,9 +27,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, configSwagger);
   SwaggerModule.setup('/swagger', app, document);
-
-  app.useGlobalPipes(new ValidationPipe());
-  app.enableCors();
 
   await app.listen(port);
 }
