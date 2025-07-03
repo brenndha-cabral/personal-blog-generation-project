@@ -29,7 +29,7 @@ export class PostController {
     return this.postService.findById(id);
   }
 
-  @Get('/title/:title')
+  @Get('/:title')
   @HttpCode(HttpStatus.OK)
   findByAllTitles(@Param('title') title: string): Promise<PostEntity[]> {
     return this.postService.findByAllTitles(title);
