@@ -1,29 +1,51 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Post } from '../../post/entities/post.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'tb_users' })
 export class User {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
+  @ApiProperty()
   name: string;
 
   @IsEmail()
   @IsNotEmpty()
+  @ApiProperty({ example: 'email@email.com.br' })
   @Column({ length: 255, nullable: false })
   user: string;
 
   @MinLength(8)
   @IsNotEmpty()
+  @ApiProperty()
   @Column({ length: 255, nullable: false })
   password: string;
 
   @Column({ length: 5000 })
+  @ApiProperty()
   photo: string;
 
+  @CreateDateColumn()
+  @ApiProperty()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  @ApiProperty()
+  update_at: Date;
+
+  @ApiProperty()
   @OneToMany(() => Post, (post) => post.user)
   post: Post[];
 }
