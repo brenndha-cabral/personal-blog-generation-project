@@ -12,15 +12,15 @@ export class UserService {
     private bcrypt: Bcrypt,
   ) {}
 
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
+  }
+
   async findByUser(user: string): Promise<User | null> {
     return await this.userRepository.findOne({
       where: { user: user },
       relations: { post: true },
     });
-  }
-
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
   }
 
   async findUserById(id: number): Promise<User> {
