@@ -17,6 +17,9 @@ export class UserService {
       where: {
         user: user,
       },
+      relations: {
+        post: true,
+      },
     });
   }
 
@@ -28,6 +31,9 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: {
         id,
+      },
+      relations: {
+        post: true,
       },
     });
 
