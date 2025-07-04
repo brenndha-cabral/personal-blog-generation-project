@@ -42,9 +42,12 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Put()
+  @Put('/:id')
   @HttpCode(HttpStatus.OK)
-  async update(@Body() user: User): Promise<User> {
-    return this.userService.update(user);
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() user: User,
+  ): Promise<User> {
+    return this.userService.update(id, user);
   }
 }

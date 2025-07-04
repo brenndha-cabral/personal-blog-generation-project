@@ -45,12 +45,12 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async update(user: User): Promise<User> {
-    await this.findUserById(user.id);
+  async update(id: number, user: User): Promise<User> {
+    await this.findUserById(id);
 
     const findUser = await this.findByUser(user.user);
 
-    if (findUser && findUser.id !== user.id)
+    if (findUser && findUser.id !== id)
       throw new HttpException(
         'Usuário (e-mail) já cadastrado!',
         HttpStatus.BAD_REQUEST,
