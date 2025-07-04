@@ -22,14 +22,14 @@ export class Theme {
   description: string;
 
   @CreateDateColumn()
-  @ApiProperty()
+  @ApiProperty({ readOnly: true })
   created_at: Date;
 
   @UpdateDateColumn()
-  @ApiProperty()
+  @ApiProperty({ readOnly: true })
   update_at: Date;
 
-  @ApiProperty()
+  @ApiProperty({ readOnly: true })
   @OneToMany(() => Post, (post) => post.theme)
   post: Post[];
 }

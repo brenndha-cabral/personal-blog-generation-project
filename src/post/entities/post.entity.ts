@@ -14,6 +14,7 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity({ name: 'tb_posts' })
 export class Post {
   @PrimaryGeneratedColumn()
+  @ApiProperty()
   id: number;
 
   @IsNotEmpty()
@@ -27,11 +28,11 @@ export class Post {
   text: string;
 
   @CreateDateColumn()
-  @ApiProperty()
+  @ApiProperty({ readOnly: true })
   created_at: Date;
 
   @UpdateDateColumn()
-  @ApiProperty()
+  @ApiProperty({ readOnly: true })
   update_at: Date;
 
   @ApiProperty({ type: () => Theme })
