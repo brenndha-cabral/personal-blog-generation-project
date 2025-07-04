@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { Post as PostEntity } from '../entities/post.entity';
@@ -35,9 +36,9 @@ export class PostController {
     return this.postService.findById(id);
   }
 
-  @Get('/:title')
+  @Get('/title/:title')
   @HttpCode(HttpStatus.OK)
-  findByAllTitles(@Param('title') title: string): Promise<PostEntity[]> {
+  findByAllTitles(@Query('title') title: string): Promise<PostEntity[]> {
     return this.postService.findByAllTitles(title);
   }
 

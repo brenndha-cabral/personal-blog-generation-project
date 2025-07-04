@@ -9,6 +9,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ThemeService } from '../services/theme.service';
@@ -35,9 +36,9 @@ export class ThemeController {
     return this.themeService.findById(id);
   }
 
-  @Get('/:description')
+  @Get('/description/:description')
   @HttpCode(HttpStatus.OK)
-  findByAllThemes(@Param('description') description: string): Promise<Theme[]> {
+  findByAllThemes(@Query('description') description: string): Promise<Theme[]> {
     return this.themeService.findByAllThemes(description);
   }
 
