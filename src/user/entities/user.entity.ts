@@ -30,10 +30,10 @@ export class User {
   @MinLength(8)
   @IsNotEmpty()
   @ApiProperty()
-  @Column({ length: 255, nullable: false })
+  @Column({ nullable: false })
   password: string;
 
-  @Column({ length: 5000 })
+  @Column()
   @ApiProperty()
   photo: string;
 

@@ -26,20 +26,26 @@ export class PostController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll(): Promise<PostEntity[]> {
-    return this.postService.findAll();
+  findAllPosts(): Promise<PostEntity[]> {
+    return this.postService.findAllPosts();
   }
 
   @Get('/:id')
   @HttpCode(HttpStatus.OK)
-  findById(@Param('id', ParseIntPipe) id: number): Promise<PostEntity> {
-    return this.postService.findById(id);
+  findPostById(@Param('id', ParseIntPipe) id: number): Promise<PostEntity> {
+    return this.postService.findPostById(id);
   }
 
   @Get('/title/:title')
   @HttpCode(HttpStatus.OK)
-  findByAllTitles(@Query('title') title: string): Promise<PostEntity[]> {
-    return this.postService.findByAllTitles(title);
+  findPostsByTitle(@Query('title') title: string): Promise<PostEntity[]> {
+    return this.postService.findPostsByTitle(title);
+  }
+
+  @Get('/theme/:theme')
+  @HttpCode(HttpStatus.OK)
+  findPostsByTheme(@Query('theme') theme: string): Promise<PostEntity[]> {
+    return this.postService.findPostsByTheme(theme);
   }
 
   @Post()

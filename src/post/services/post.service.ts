@@ -14,13 +14,13 @@ export class PostService {
     private userService: UserService,
   ) {}
 
-  async findAll(): Promise<Post[]> {
+  async findAllPosts(): Promise<Post[]> {
     return await this.postRepository.find({
       relations: { theme: true, user: true },
     });
   }
 
-  async findById(id: number): Promise<Post> {
+  async findPostById(id: number): Promise<Post> {
     const postById = await this.postRepository.findOne({
       where: { id },
       relations: { theme: true, user: true },
@@ -33,7 +33,7 @@ export class PostService {
     return postById;
   }
 
-  async findByAllTitles(title: string): Promise<Post[]> {
+  async findPostsByTitle(title: string): Promise<Post[]> {
     const postsByTitle = await this.postRepository.find({
       where: { title: ILike(`%${title}%`) },
       relations: { theme: true, user: true },
@@ -49,6 +49,26 @@ export class PostService {
     return postsByTitle;
   }
 
+  async findPostsByTheme(theme: string): Promise<Post[]> {
+    const postsByTheme = await this.postRepository.find({
+      where: {
+        theme: {
+          description: ILike(`%${theme}%`),
+        },
+      },
+      relations: { theme: true, user: true },
+    });
+
+    if (!postsByTheme) {
+      throw new HttpException(
+        'Nenhum post encontrado para este tema',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return postsByTheme;
+  }
+
   async create(post: Post): Promise<Post> {
     await this.themeService.findById(post.theme.id);
     await this.userService.findUserById(post.user.id);
@@ -56,14 +76,14 @@ export class PostService {
   }
 
   async update(post: Post): Promise<Post> {
-    await this.findById(post.id);
+    await this.findPostById(post.id);
     await this.themeService.findById(post.theme.id);
     await this.userService.findUserById(post.user.id);
     return await this.postRepository.save(post);
   }
 
   async delete(id: number): Promise<DeleteResult> {
-    await this.findById(id);
+    await this.findPostById(id);
     return await this.postRepository.delete(id);
   }
 }

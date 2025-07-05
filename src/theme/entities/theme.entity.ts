@@ -12,14 +12,22 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ name: 'tb_themes' })
 export class Theme {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() // ('uuid') -> poderia ser neste padrão tbm
   @ApiProperty()
   id: number;
 
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty()
+  @ApiProperty({ example: 'Nome do método de cartomancia' })
   description: string;
+
+  @Column({ nullable: false })
+  @ApiProperty({ example: 'Origem histórica (ex: "Europa Medieval")' })
+  origin: string;
+
+  @Column()
+  @ApiProperty({ example: 'Imagem representativa' })
+  photo: string;
 
   @CreateDateColumn()
   @ApiProperty({ readOnly: true })

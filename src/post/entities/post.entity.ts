@@ -23,9 +23,21 @@ export class Post {
   title: string;
 
   @IsNotEmpty()
-  @Column({ length: 100, nullable: false })
+  @Column({ nullable: false })
   @ApiProperty()
   text: string;
+
+  @Column()
+  @ApiProperty({
+    example: 'Ex: "Leitura de 3 cartas", "Mapa Astral"',
+  })
+  readingType: string;
+
+  @Column('simple-array', { nullable: true })
+  @ApiProperty({
+    example: 'Cartas envolvidas ex: ["O Louco", "A Sacerdotisa"]',
+  })
+  cards?: string[];
 
   @CreateDateColumn()
   @ApiProperty({ readOnly: true })

@@ -17,9 +17,9 @@ async function bootstrap() {
     .setTitle('Blog Pessoal')
     .setDescription('Projeto Blog Pessoal')
     .setContact(
-      'Generation Brasil',
-      'http://www.generationbrasil.online',
-      'generation@email.com',
+      'Brenndha Cabral',
+      'GitHub: https://github.com/brenndha-cabral',
+      'LinkedIn: https://www.linkedin.com/in/brenndhacabral/',
     )
     .setVersion('1.0')
     .addBearerAuth()
