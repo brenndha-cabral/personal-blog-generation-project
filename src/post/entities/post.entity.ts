@@ -19,7 +19,7 @@ export class Post {
 
   @IsNotEmpty()
   @Column({ length: 100, nullable: false })
-  @ApiProperty()
+  @ApiProperty({ example: 'Mudança na vida de Gêmeos nessa lua nova!' })
   title: string;
 
   @IsNotEmpty()
