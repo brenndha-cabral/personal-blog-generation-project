@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
-import { Post } from '../../../post/entities/post.entity';
-import { Theme } from '../../../theme/entities/theme.entity';
-import { User } from '../../../user/entities/user.entity';
+import { Post } from '../../post/entities/post.entity';
+import { Theme } from '../../theme/entities/theme.entity';
+import { User } from '../../user/entities/user.entity';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

@@ -6,7 +6,7 @@ import { ThemeModule } from './theme/theme.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
-import { DevService } from './auth/data/services/dev.service';
+import { DevService } from './data/services/dev.service';
 
 @Module({
   imports: [
